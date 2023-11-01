@@ -13,14 +13,14 @@ stages:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)'
-        repository: $(DOCKER_REPOSITORY_NAME)
+        repository: $(my-docker-repo)
 
     - task: ECRPushImage@1
       inputs:
         awsCredentials: 'ecr_connection'
-        regionName: $(AWS_REGION)
-        imageSource: 'imagename'
-        sourceImageName: $(DOCKER_REPOSITORY_NAME)
+        regionName: $(us-east-2)
+        imageSource: 'latest'
+        sourceImageName: $(my-docker-repo)
         sourceImageTag: $(Build.BuildId)
         pushTag: latest
-        repositoryName: $(DOCKER_REPOSITORY_NAME)
+        repositoryName: $(my-docker-repo)
