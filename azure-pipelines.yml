@@ -26,13 +26,13 @@ stages:
         containerRegistry: 'Art_Docker'
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        repository: $(repoName)
+        repository: $(my-docker-repo)
         tags: |
           $(tag)
     - task: ArtifactoryDocker@1
       inputs:
         command: 'push'
         artifactoryService: 'Art_SVC_conn'
-        targetRepo: '$(repoName)'
+        targetRepo: '$(my-docker-repo)'
         imageName: '$(imageName):$(tag)'
     
